@@ -14,6 +14,6 @@ public class SimpleListCommand implements SimpleCommand {
 		AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(AppContext.class);
 		SimpleDao simpleDao = ctx.getBean("simpleDao", SimpleDao.class);
 		
-		// simpleDao.xxx();
+		model.addAttribute("list", simpleDao.simpleList());
 	}
 }
