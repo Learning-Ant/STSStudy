@@ -8,7 +8,7 @@ import com.koreait.contact2.dao.ContactDao;
 public class ContactListCommand implements ContactCommand {
 
 	@Autowired
-	private ContactDao contactDao=new ContactDao();
+	private ContactDao contactDao;
 	
 	@Override
 	public void execute(Model model) {
