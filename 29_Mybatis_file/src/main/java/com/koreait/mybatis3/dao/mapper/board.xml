@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<!-- namespace는 dao interface와 연결한다. -->
+<mapper namespace="com.koreait.mybatis3.dao.BoardDao">
+	
+	<select id="boardList" resultType="com.koreait.mybatis3.dto.BoardDto" >
+		SELECT NO, WRITER, TITLE, CONTENT, FILENAME, REGDATE
+		FROM BOARD
+	</select>
+	
+	<insert id="boardInsert" >
+		INSERT INTO
+		BOARD (NO, WRITER, TITLE, CONTENT, FILENAME, REGDATE)
+		VALUES (BOARD_SEQ.NEXTVAL, #{param1}, #{param2}, #{param3}, #{param4}, SYSDATE)
+	</insert>
+	
+	<select id="boardView" parameterType="int" resultType="com.koreait.mybatis3.dto.BoardDto" >
+		SELECT *
+		FROM BOARD
+		WHERE NO = #{no}
+	</select>
+	
+	<delete id="boardDelete" parameterType="int">
+		DELETE FROM
+		BOARD
+		WHERE NO=#{no}
+	</delete>
+</mapper>

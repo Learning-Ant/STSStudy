@@ -17,11 +17,11 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
-	<bean class="com.koreait.contact2.command.ContactListCommand" />
-	<bean class="com.koreait.contact2.command.ContactInsertCommand" />
-	<bean class="com.koreait.contact2.command.ContactUpdateCommand" />
-	<bean class="com.koreait.contact2.command.ContactViewCommand" />
-	<bean class="com.koreait.contact2.command.ContactDeleteCommand" />
+	<bean id="contactListCommand" class="com.koreait.contact2.command.ContactListCommand" />
+	<bean id="contactInsertCommand" class="com.koreait.contact2.command.ContactInsertCommand" />
+	<bean id="contactUpdateCommand" class="com.koreait.contact2.command.ContactUpdateCommand" />
+	<bean id="contactViewCommand" class="com.koreait.contact2.command.ContactViewCommand" />
+	<bean id="contactDeleteCommand" class="com.koreait.contact2.command.ContactDeleteCommand" />
 	
-	<bean class="com.koreait.contact2.dao.ContactDao" />
+	<bean id="contactDao" class="com.koreait.contact2.dao.ContactDao" />
 </beans>
