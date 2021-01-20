@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
+	<!--
+		자바 Annotation을 활용해서 Bean을 생성한다면,
+		Namespaces에서 context를 추가하고 <context:annotation-config />태그를 추가한다.
+	-->
 	
+	<!-- speaker : 정상 생성된다. (int volume은 자동으로 0으로 초기화 되기 때문이다.)  -->
 	<bean id="speaker" class="com.koreait.spring.Speaker" />
-
+	
+	<!--
+		tv : 비정상적인 Bean이 생성된다. (Speaker speaker는 자동으로 null로 초기화 되는데
+		이렇게 되면 speaker.volumeUp(volume)에서 NullPointerException이 발생한다.
+	 -->
+	 <!-- 정상적인 주입이 되려면 <property name="speaker" ref="speaker" />가 필요하지만 지금 없다. -->
+	 <bean id="tv" class="com.koreait.spring.TV" />
+	 
+	 <!--
+	 	현재 speaker Bean은 생성되었지만,
+	 	TV 클래스의 property인 (field) Speaker speaker는 생성되지 않았으므로
+	 	TV 클래스에서 직접 Speaker speaker를 생성해 보려고 한다. 
+	 	(TV 클래스의 filed speaker에 @Autowired Annotation을 달아준다.)
+	 -->
 </beans>
