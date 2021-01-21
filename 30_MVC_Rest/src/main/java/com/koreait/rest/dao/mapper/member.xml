@@ -5,7 +5,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 <!-- namespace는 dao interface와 연결한다. -->
-<mapper namespace="com.koreait.rest.dao.memberDao">
+<mapper namespace="com.koreait.rest.dao.MemberDao">
 	
+	<select id="memberList" resultType="com.koreait.rest.dto.MemberDto" >
+		SELECT *
+		FROM MEMBER
+	</select>
+	
+	<select id="memberView" resultType="com.koreait.rest.dto.MemberDto" parameterType="int" >
+		SELECT *
+		FROM MEMBER
+		WHERE NO=#{no}
+	</select>
+	
+	<insert id="memberInsert" parameterType="com.koreait.rest.dto.MemberDto" >
+		INSERT INTO
+		MEMBER (NO, ID, NAME, GENDER, ADDRESS)
+		VALUES (MEMBER_SEQ.NEXTVAL, #{id}, #{name}, #{gender}, #{address})
+	</insert>
+	
+	<update id="memberUpdate" parameterType="com.koreait.rest.dto.MemberDto" >
+		UPDATE MEMBER
+		SET NAME=#{name}, GENDER=#{gender}, ADDRESS=#{address}
+		WHERE NO=#{no}
+	</update>
+	
+	<delete id="memberDelete" parameterType="int" >
+		DELETE 
+		FROM MEMBER
+		WHERE NO=#{no}
+	</delete>
 	
 </mapper>
