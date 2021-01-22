@@ -5,7 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- JQuery -->
+<script src="http://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<!-- BootStrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<!-- Fontawesome-->
+<script src="https://kit.fontawesome.com/2499ffc112.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 	let afterInsert = '${afterInsert}';
 	if (afterInsert){
@@ -34,7 +39,7 @@
 
 	<div class="container mx-auto my-4" style="width:60%">
 		<h3>게시글 목록</h3>
-		전체:${totalCount}개 개시글<br/>
+		전체:${totalRecord}개 개시글<br/>
 	</div>
 	<table class="table table-striped table-hover my-4" style="width:60%; margin:auto;">
 	<caption><button type="button" class="btn btn-primary" onclick="location.href='simpleInsertPage.do'" >새글 작성하러 가기</button></caption>
@@ -53,16 +58,21 @@
 				</tr>
 			</c:if>
 			<c:if test="${not empty list}">
-				<c:forEach var="simpleDto" items="${list}">
+				<c:forEach var="simpleDto" items="${list}" varStatus="k" >
 					<tr>
-						<td>${simpleDto.no}</td>
+						<td>${totalRecord-((page - 1) * recordPerPage + k.index)}</td>
 						<td>${simpleDto.writer}</td>
-						<td><a href="simpleViewPage.do?no=${simpleDto.no}">${simpleDto.title} </a> </td>
+						<td><a href="simpleViewPage.do?no=${simpleDto.no}&page=${page}">${simpleDto.title} </a> </td>
 						<td>${simpleDto.regDate}</td>
 					</tr>
 				</c:forEach>
 			</c:if>
 		</tbody>
+		<tfoot>
+			<tr>
+				<th colspan="4">${paging}</th>
+			</tr>
+		</tfoot>
 	</table>
 	
 </body>

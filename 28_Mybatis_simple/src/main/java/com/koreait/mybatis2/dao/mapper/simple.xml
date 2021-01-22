@@ -3,15 +3,25 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-
-
 <mapper namespace="com.koreait.mybatis2.dao.SimpleDao">
+	<!--
 	<select id="simpleList" resultType="com.koreait.mybatis2.dto.SimpleDto">
 		SELECT *
 		FROM SIMPLE
 	</select>
-	
-	<select id="totalCount" resultType="int">
+	 -->
+		
+	<select id="simpleList" resultType="com.koreait.mybatis2.dto.SimpleDto">
+		SELECT B.*
+		  FROM (SELECT ROWNUM AS RN, A.*
+				  FROM (SELECT *
+						  FROM SIMPLE
+					  ORDER BY NO DESC) A ) B
+		WHERE B.RN BETWEEN #{param1} AND #{param2}
+	</select>
+		
+		
+	<select id="totalRecord" resultType="int">
 		SELECT COUNT(*)
 		FROM SIMPLE
 	</select>

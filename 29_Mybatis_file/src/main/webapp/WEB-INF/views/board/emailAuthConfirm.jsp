@@ -10,20 +10,28 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 <!-- Fontawesome-->
 <script src="https://kit.fontawesome.com/2499ffc112.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	function fn_mailAuthConfirm(f){
+		let authKey = '${authKey}';
+		let userKey = f.userKey.value;
+		if(userKey!=authKey){
+			alert('인증코드가 유효하지않습니다. 인증코드를 확인해 주세요');
+			return;
+		} else if (userKey==authKey){
+			alert('인증에 성공했습니다. 게시판으로 이동합니다.');
+			f.action='boardListPage.do';
+			f.submit();
+		}
+	}
+</script>
 <title>Insert title here</title>
 </head>
 <body>
-
-	<div class="container mx-auto my-5">
-		<!-- 이메일 인증 성공하면 게시판을 이용할 수 있습니다. -->
-		<form action="emailAuth.do" method="post">
-			게시판 이용을 위해서는 이메일 인증을 받으셔야 합니다.<br/><br/>
-			이메일 입력<input type="text" name="email" placeholder="example01@example.com" autofocus />
-			<button class="btn btn-primary">인증요청하기</button> 
-		</form>
-		
-		<!-- <a class="btn btn-primary" href="boardListPage.do">게시판으로 가기</a> -->
-	</div>
-
+	
+	<form>
+		여기에 인증코드를 입력하세요<br/>
+		<input type="text" name="userKey" />
+		<input class="btn btn-primary" type="button" value="인증하기" onclick="fn_mailAuthConfirm(this.form)" />
+	</form>
 </body>
 </html>

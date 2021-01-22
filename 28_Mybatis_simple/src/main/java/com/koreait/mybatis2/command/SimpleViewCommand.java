@@ -16,6 +16,7 @@ public class SimpleViewCommand implements SimpleCommand {
 		SimpleDao simpleDao = sqlSession.getMapper(SimpleDao.class);
 		
 		model.addAttribute("simpleDto", simpleDao.simpleView(no));
+		model.addAttribute("page", request.getParameter("page"));
 	}
 
 }

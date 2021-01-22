@@ -37,4 +37,24 @@
 	<bean id="boardViewCommand" class="com.koreait.mybatis3.command.BoardViewCommand" />
 	<bean id="downloadCommand" class="com.koreait.mybatis3.command.DownloadCommand" />
 	<bean id="boardDeleteCommand" class="com.koreait.mybatis3.command.BoardDeleteCommand" />
+	
+	<bean id="emailAuthCommand" class="com.koreait.mybatis3.command.EmailAuthCommand" />
+	
+	<!-- 이메일 인증 : mailSender -->
+	<!-- 1. 메일을 보내는 계정은 "구글" 계정이어야만 한다. -->
+	<!-- 2. 메일을 받는 계정은 모두 가능 -->
+	<!-- 3. 정상적인 동작을 위해 "구글 로그인" -> "보안 수준이 낮은 앱 허용"을 해야한다. -->
+	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl" >
+		<property name="host" value="smtp.googlemail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="a86007681@gmail.com" />
+		<property name="password" value="" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.auth">true</prop>
+			</props>
+		</property>
+	</bean>
 </beans>
