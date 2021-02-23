@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.finalproject.dao.BoardDao">
+
+	<select id="selectBoardList" resultType="com.koreait.finalproject.dto.BoardDto">
+		SELECT BIDX, BTITLE, BWRITER, BCONTENT, BDATE
+		  FROM BOARD
+      ORDER BY BIDX DESC
+	</select>
+	
+	<select id="selectBoardCount" resultType="int">
+		SELECT COUNT(*)
+		  FROM BOARD
+	</select>
+	
+	<insert id="insertBoard" parameterType="com.koreait.finalproject.dto.BoardDto" >
+		INSERT INTO
+		BOARD (BIDX, BWRITER, BTITLE, BCONTENT, BDATE)
+		VALUES (BOARD_SEQ.NEXTVAL, #{bWriter}, #{bTitle}, #{bContent}, SYSDATE)
+	</insert>
+	
+	<select id="viewBoard" parameterType="int" resultType="com.koreait.finalproject.dto.BoardDto">
+		SELECT *
+		FROM BOARD
+		WHERE BIDX = #{param1}
+	</select>
+	
+	<update id="updateBoard" parameterType="com.koreait.finalproject.dto.BoardDto" >
+		UPDATE BOARD
+		SET BTITLE=#{bTitle}, BCONTENT=#{bContent}
+		WHERE BIDX=#{bIdx}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int" >
+		DELETE FROM
+		BOARD
+		WHERE BIDX=#{param1}
+	</delete>
+</mapper>
